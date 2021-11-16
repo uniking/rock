@@ -20,12 +20,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_get_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="获取root权限" />
+
+                <Button
+                    android:id="@+id/bt_get_usage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="获取使用情况权限" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_init_idle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="初始化睡眠配置" />
+
+                <Button
+                    android:id="@+id/bt_entry_idle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="进入睡眠" />
+            </LinearLayout>
             <Button
-                android:id="@+id/bt_get_root"
+                android:id="@+id/bt_ignore_wakuplock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="获取root权限" />
+                android:text="忽略指定包的wakup_lock" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,14 +84,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="启用" />
+                    android:text="启用应用" />
 
                 <Button
                     android:id="@+id/bt_disenable_app"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="冻结" />
+                    android:text="冻结应用" />
             </LinearLayout>
 
             <LinearLayout
@@ -67,11 +114,24 @@
                     android:text="从冻结名单移除" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/bt_print_app"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="打印冻结名单" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bt_print_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="打印冻结名单" />
+                <Button
+                    android:id="@+id/bt_xxx"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_msg"

@@ -1,39 +1,29 @@
 package com.uniking.rock;
 
-import android.app.Application;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
+import android.content.pm.PackageManager;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.uniking.receiver.ScreenBroadcastReceiver;
 import com.uniking.tool.Adb;
 import com.uniking.tool.AppList;
 
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
-    private String selectApp = "";
+    private String selectAppLab = "";
     Map<String, String> apps;
     ScreenBroadcastReceiver mScreenReceiver;
     Intent mForegroundService;
@@ -53,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    selectApp = adapter.getItem(position);
+                    selectAppLab = adapter.getItem(position);
                 }
 
                 @Override
@@ -81,14 +71,43 @@ public class MainActivity extends AppCompatActivity {
                 Adb.suDo("ls /");
             }
         });
+        findViewById(R.id.bt_get_usage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    if(checkSelfPermission(Settings.ACTION_USAGE_ACCESS_SETTINGS) != PackageManager.PERMISSION_GRANTED){
+                        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                        startActivityForResult(intent, 1);
+                    }
+                }
+            }
+        });
+        findViewById(R.id.bt_init_idle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.initIdle();
+            }
+        });
+        findViewById(R.id.bt_entry_idle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.forceLightIdle();
+            }
+        });
+        findViewById(R.id.bt_ignore_wakuplock).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.ignoreWakupLock(apps.get(selectAppLab));
+            }
+        });
 
         findViewById(R.id.bt_enable_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Adb.isEnable(getApplicationContext(), apps.get(selectApp))){
+                if(Adb.isEnable(getApplicationContext(), apps.get(selectAppLab))){
                     Toast.makeText(getApplicationContext(), "已经是启用状态", Toast.LENGTH_SHORT).show();
                 }else{
-                    Adb.enableApp(apps.get(selectApp));
+                    Adb.enableApp(apps.get(selectAppLab));
                     Toast.makeText(getApplicationContext(), "启用成功", Toast.LENGTH_SHORT).show();
                 }
 
@@ -98,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_disenable_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Adb.isEnable(getApplicationContext(), apps.get(selectApp))){
-                    Adb.disableApp(apps.get(selectApp));
+                if(Adb.isEnable(getApplicationContext(), apps.get(selectAppLab))){
+                    Adb.disableApp(apps.get(selectAppLab));
                     Toast.makeText(getApplicationContext(), "禁用成功", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getApplicationContext(), "已经是禁用状态", Toast.LENGTH_SHORT).show();
@@ -111,14 +130,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_add_disenable_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AppList(getApplicationContext()).addDisableList(apps.get(selectApp), selectApp);
+                new AppList(getApplicationContext()).addDisableList(apps.get(selectAppLab), selectAppLab);
             }
         });
 
         findViewById(R.id.bt_remove_disenable_list).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AppList(getApplicationContext()).deleteDisableList(apps.get(selectApp));
+                new AppList(getApplicationContext()).deleteDisableList(apps.get(selectAppLab));
             }
         });
 

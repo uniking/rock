@@ -118,4 +118,34 @@ public class Adb{
     public static void enableApp(String packageName){
         suDo("pm enable " + packageName);
     }
+
+    public static void initIdle(){
+        //关闭深度休眠
+        suDo("dumpsys deviceidle disable deep");
+        //开启浅度休眠
+        suDo("dumpsys deviceidle enable light");
+        //调节浅度休眠周期
+        suDo("settings put global device_idle_constants inactive_to=2592000000,motion_inactive_to=2592000000,light_after_inactive_to=20000,light_pre_idle_to=30000,light_max_idle_to=86400000,light_idle_to=1800000,light_idle_factor=1.5,light_idle_maintenance_max_budget=30000,light_idle_maintenance_min_budget=10000,min_time_to_alarm=60000");
+    }
+
+    /*
+    Now forced in to deep idle mode
+    进入深度休眠模式
+     */
+    public static void forceLightIdle(){
+        // dumpsys deviceidle step deep
+        suDo("dumpsys deviceidle force-idle light");
+    }
+
+    /*
+    退出深度休眠模式
+     */
+    public static void unforceIdle(){
+        // dumpsys deviceidle step light
+        suDo("dumpsys deviceidle unforce");
+    }
+
+    public static void ignoreWakupLock(String packageName){
+        suDo("cmd appops set " + packageName + " WAKE_LOCK ignore");
+    }
 }
