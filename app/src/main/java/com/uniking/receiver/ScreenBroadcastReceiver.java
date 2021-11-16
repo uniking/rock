@@ -30,8 +30,9 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void run() {
-            Map<String, String> apps = new AppList(mContext).getDisableList();
 
+            //冻结应用
+            Map<String, String> apps = new AppList(mContext).getDisableList();
             PackageManager pm = mContext.getPackageManager();
             for(String pkg : apps.keySet()){
                 try{
@@ -43,27 +44,41 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
                     e.printStackTrace();
                 }
             }
+
+            //进入light idle模式
+            if("IDLE".equals(Adb.getLightIdle())){
+                ;//Adb.unforceIdle();
+            }else{
+                Adb.forceLightIdle();
+            }
         }
+
+
     }
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        action = intent.getAction();
-        if (Intent.ACTION_SCREEN_ON.equals(action)) { // 开屏
-            Log.i("xxx", "开屏");
-        } else if (Intent.ACTION_SCREEN_OFF.equals(action)) { // 锁屏
-            Log.i("xxx", "锁屏");
-            disableTimer = new Timer();
-            disableTimer.schedule(new DisableTask(context), 1000*60*10);
-        } else if (Intent.ACTION_USER_PRESENT.equals(action)) { // 解锁
-            Log.i("xxx", "解锁");
-            if(disableTimer != null){
-                disableTimer.cancel();
-                disableTimer = null;
-            }
+        try{
+            action = intent.getAction();
+            if (Intent.ACTION_SCREEN_OFF.equals(action)) { // 锁屏
+                disableTimer = new Timer();
+                disableTimer.schedule(new DisableTask(context), 1000*60*10);
+            } else if (Intent.ACTION_USER_PRESENT.equals(action)) { // 解锁
+                //取消timer
+                if(disableTimer != null){
+                    disableTimer.cancel();
+                    disableTimer = null;
+                }
 
+                //取消light idle模式
+                if(Adb.getLightIdle().startsWith("IDLE")){
+                    Adb.unforceIdle();
+                }
+            }
+        }catch (Exception e){
+            ;
         }
     }
 }

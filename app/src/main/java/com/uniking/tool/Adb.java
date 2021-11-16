@@ -148,4 +148,8 @@ public class Adb{
     public static void ignoreWakupLock(String packageName){
         suDo("cmd appops set " + packageName + " WAKE_LOCK ignore");
     }
+
+    public static String getLightIdle(){
+        return suDo("dumpsys deviceidle get light");
+    }
 }
