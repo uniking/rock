@@ -1,4 +1,4 @@
-package com.uniking.rock;
+package com.uniking.service;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,17 +10,20 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.uniking.rock.MainActivity;
+import com.uniking.rock.NotificationActivity;
+import com.uniking.rock.R;
 
 /**
  * Created by wzl on 11/15/21.
  */
 
 public class ForegroundService extends Service {
-    static boolean serviceIsLive = false;
+    public static boolean serviceIsLive = false;
     private static final int NOTIFICATION_DOWNLOAD_PROGRESS_ID = 0x0001;
     private static final String TAG = ForegroundService.class.getSimpleName();
 

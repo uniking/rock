@@ -59,7 +59,10 @@ public class Adb{
         return apps;
     }
 
-    public static Map<String, String> getNoSysPackageList(Context ctx) {
+    /*
+    type 0所有的app， 1可用的app， 2禁用的app
+     */
+    public static Map<String, String> getNoSysPackageList(Context ctx, int type) {
         Map<String, String> apps = new HashMap<>();
         PackageManager pm = ctx.getPackageManager();
         List<ApplicationInfo> iapp = pm.getInstalledApplications(0);
@@ -67,7 +70,24 @@ public class Adb{
             if((one.flags&ApplicationInfo.FLAG_SYSTEM)==ApplicationInfo.FLAG_SYSTEM){
                 ;
             }else{
-                apps.put(pm.getApplicationLabel(one).toString(), one.packageName);
+                switch (type){
+                    case 0:
+                        apps.put(pm.getApplicationLabel(one).toString(), one.packageName);
+                        break;
+                    case 1:
+                        if(one.enabled){
+                            apps.put(pm.getApplicationLabel(one).toString(), one.packageName);
+                        }
+                        break;
+                    case 2:
+                        if(!one.enabled){
+                            apps.put(pm.getApplicationLabel(one).toString(), one.packageName);
+                        }
+                        break;
+                    default:
+                        ;
+                }
+
             }
         }
 
@@ -125,7 +145,7 @@ public class Adb{
         //开启浅度休眠
         suDo("dumpsys deviceidle enable light");
         //调节浅度休眠周期
-        suDo("settings put global device_idle_constants inactive_to=2592000000,motion_inactive_to=2592000000,light_after_inactive_to=20000,light_pre_idle_to=30000,light_max_idle_to=86400000,light_idle_to=1800000,light_idle_factor=1.5,light_idle_maintenance_max_budget=30000,light_idle_maintenance_min_budget=10000,min_time_to_alarm=60000");
+        suDo("settings put global device_idle_constants light_idle_factor=2.0,inactive_to=2592000000,motion_inactive_to=2592000000,light_after_inactive_to=15000,light_pre_idle_to=30000,light_max_idle_to=86400000,light_idle_to=43200000,light_idle_maintenance_max_budget=30000,light_idle_maintenance_min_budget=10000,min_time_to_alarm=60000");
     }
 
     /*
@@ -149,7 +169,19 @@ public class Adb{
         suDo("cmd appops set " + packageName + " WAKE_LOCK ignore");
     }
 
-    public static String getLightIdle(){
+    public static String getLightStatus(){
         return suDo("dumpsys deviceidle get light");
+    }
+
+    public static String getDeepStatus(){
+        return suDo("dumpsys deviceidle get deep");
+    }
+
+    public static String enabledDeep(){
+        return suDo("dumpsys deviceidle enabled deep");
+    }
+
+    public static String enabledLight(){
+        return suDo("dumpsys deviceidle enabled light");
     }
 }

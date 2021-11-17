@@ -46,11 +46,11 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
             }
 
             //进入light idle模式
-            if("IDLE".equals(Adb.getLightIdle())){
-                ;//Adb.unforceIdle();
-            }else{
-                Adb.forceLightIdle();
-            }
+//            if("IDLE".equals(Adb.getLightStatus())){
+//                ;//Adb.unforceIdle();
+//            }else{
+//                Adb.forceLightIdle();
+//            }
         }
 
 
@@ -73,9 +73,9 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
                 }
 
                 //取消light idle模式
-                if(Adb.getLightIdle().startsWith("IDLE")){
-                    Adb.unforceIdle();
-                }
+//                if(Adb.getLightStatus().startsWith("IDLE")){
+//                    Adb.unforceIdle();
+//                }
             }
         }catch (Exception e){
             ;

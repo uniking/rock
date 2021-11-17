@@ -1,13 +1,17 @@
 package com.uniking.rock;
 
+import android.app.Activity;
+import android.app.TabActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TabHost;
 
 /**
  * Created by wzl on 11/15/21.
  */
 
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

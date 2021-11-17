@@ -24,8 +24,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".NotificationActivity"/>
+        <activity android:name=".IdleActivity"/>
+        <activity android:name=".DisableActivity"/>
+        <activity android:name=".EnableActivity"/>
 
-        <service android:name=".ForegroundService"/>
+        <service android:name="com.uniking.service.ForegroundService"/>
     </application>
 
 </manifest>

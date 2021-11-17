@@ -5,143 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.uniking.rock.MainActivity">
-
-    <ScrollView
+    <TabHost
+        android:id="@android:id/tabhost"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinner_apps"
+            <TabWidget
+                android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <LinearLayout
+            <FrameLayout
+                android:id="@android:id/tabcontent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/bt_get_root"
+                <LinearLayout
+                    android:id="@+id/tab1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="获取root权限" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/bt_get_usage"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tab2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="获取使用情况权限" />
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_init_idle"
+                <LinearLayout
+                    android:id="@+id/tab3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="初始化睡眠配置" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/bt_entry_idle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="进入睡眠" />
-            </LinearLayout>
-            <Button
-                android:id="@+id/bt_ignore_wakuplock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="忽略指定包的wakup_lock" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_enable_app"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="启用应用" />
-
-                <Button
-                    android:id="@+id/bt_disenable_app"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="冻结应用" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_add_disenable_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="添加到冻结名单" />
-
-                <Button
-                    android:id="@+id/bt_remove_disenable_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="从冻结名单移除" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/bt_print_app"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="打印冻结名单" />
-                <Button
-                    android:id="@+id/bt_xxx"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/et_msg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:text="Name" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
-
-    </ScrollView>
-
+    </TabHost>
 </android.support.constraint.ConstraintLayout>
