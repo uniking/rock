@@ -1,11 +1,7 @@
 package com.uniking.rock;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -107,24 +103,6 @@ public class IdleActivity extends Activity {
             Toast.makeText(this, "adapter==null", Toast.LENGTH_SHORT).show();
         }
 
-        //-------------------
-        findViewById(R.id.bt_get_root).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Adb.suDo("ls /");
-            }
-        });
-        findViewById(R.id.bt_get_usage).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if(checkSelfPermission(Settings.ACTION_USAGE_ACCESS_SETTINGS) != PackageManager.PERMISSION_GRANTED){
-                        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-                        startActivityForResult(intent, 1);
-                    }
-                }
-            }
-        });
         findViewById(R.id.bt_init_idle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
