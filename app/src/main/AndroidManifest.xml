@@ -31,7 +31,13 @@
         <activity android:name=".SettingActivity"/>
         <activity android:name=".BigbangActivity"/>
 
+
+        <activity android:name="com.uniking.activity.ZhiFuBao"/>
+        <activity android:name="com.uniking.activity.Wechat"/>
+        <activity android:name="com.uniking.activity.QQ"/>
+
         <service android:name="com.uniking.service.ForegroundService"/>
+        <receiver android:name="com.uniking.receiver.ShortCutReceiver" />
     </application>
 
 </manifest>

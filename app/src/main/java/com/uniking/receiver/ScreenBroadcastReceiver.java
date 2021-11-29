@@ -19,18 +19,17 @@ import java.util.TimerTask;
 
 public class ScreenBroadcastReceiver extends BroadcastReceiver {
     private String action = null;
+    Object clock = new Object();
     Timer disableTimer;
+    Timer idleTimer;
 
     class DisableTask extends TimerTask{
         Context mContext;
-
         public DisableTask(Context context){
             mContext = context;
         }
-
         @Override
         public void run() {
-
             //冻结应用
             Map<String, String> apps = new AppList(mContext).getDisableList();
             PackageManager pm = mContext.getPackageManager();
@@ -44,16 +43,23 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
                     e.printStackTrace();
                 }
             }
-
-            //进入light idle模式
-//            if("IDLE".equals(Adb.getLightStatus())){
-//                ;//Adb.unforceIdle();
-//            }else{
-//                Adb.forceLightIdle();
-//            }
         }
+    }
 
-
+    class IdleTask extends TimerTask{
+        Context mContext;
+        public IdleTask(Context context){
+            mContext = context;
+        }
+        @Override
+        public void run() {
+            //进入light idle模式
+            if("IDLE".equals(Adb.getLightStatus())){
+                ;//Adb.unforceIdle();
+            }else{
+                Adb.forceLightIdle();
+            }
+        }
     }
 
 
@@ -63,13 +69,28 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
         try{
             action = intent.getAction();
             if (Intent.ACTION_SCREEN_OFF.equals(action)) { // 锁屏
-                disableTimer = new Timer();
-                disableTimer.schedule(new DisableTask(context), 1000*60*10);
+                synchronized (clock){
+                    //锁屏10分钟冻结应用
+                    disableTimer = new Timer();
+                    disableTimer.schedule(new DisableTask(context), 1000*60*10);
+
+                    //锁屏30秒进入idle
+                    //发现文件管理的ftp服务阻止了进入idle,还是强制进入吧
+//                    idleTimer = new Timer();
+//                    idleTimer.schedule(new IdleTask(context), 1000*30);
+                }
+
             } else if (Intent.ACTION_USER_PRESENT.equals(action)) { // 解锁
-                //取消timer
-                if(disableTimer != null){
-                    disableTimer.cancel();
-                    disableTimer = null;
+                synchronized (clock){
+                    //取消timer
+                    if(disableTimer != null){
+                        disableTimer.cancel();
+                        disableTimer = null;
+                    }
+//                    if(idleTimer != null){
+//                        idleTimer.cancel();
+//                        idleTimer = null;
+//                    }
                 }
 
                 //取消light idle模式

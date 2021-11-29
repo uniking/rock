@@ -3,6 +3,9 @@ package com.uniking.tool;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+
+import com.uniking.rock.R;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
