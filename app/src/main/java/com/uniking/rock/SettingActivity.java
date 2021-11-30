@@ -9,12 +9,8 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
-import com.uniking.activity.QQ;
-import com.uniking.activity.Wechat;
-import com.uniking.activity.ZhiFuBao;
 import com.uniking.service.ForegroundService;
 import com.uniking.tool.Adb;
-import com.uniking.tool.DeskShortCut;
 
 /**
  * Created by wzl on 11/17/21.
@@ -71,25 +67,6 @@ public class SettingActivity extends Activity {
                         startActivityForResult(intent, 1);
                     }
                 }
-            }
-        });
-
-        findViewById(R.id.bt_zhifubao).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeskShortCut.addShortCutCompact(getApplicationContext(), ZhiFuBao.class, "支付宝", "com.eg.android.AlipayGphone");
-            }
-        });
-        findViewById(R.id.bt_wechat).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeskShortCut.addShortCutCompact(getApplicationContext(), Wechat.class, "微信", "com.tencent.mm");
-            }
-        });
-        findViewById(R.id.bt_qq).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DeskShortCut.addShortCutCompact(getApplicationContext(), QQ.class, "QQ", "com.tencent.mobileqq");
             }
         });
     }

@@ -9,6 +9,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.uniking.tool.Adb;
+import com.uniking.tool.DeskShortCut;
+import com.uniking.tool.Shutcut2Activity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +78,23 @@ public class EnableActivity extends Activity {
                 }else{
                     Adb.enableApp(apps.get(selectAppLab));
                     Toast.makeText(getApplicationContext(), "启用成功", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        findViewById(R.id.bt_add_shutcut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = Shutcut2Activity.getInstance(getApplicationContext()).getAvailableId();
+                if(id >= 0){
+                    String shotLabel = selectAppLab;
+                    String packagename = apps.get(selectAppLab);
+
+                    Shutcut2Activity.getInstance(getApplicationContext()).addShutcut2ActivityMap(id, packagename);
+                    DeskShortCut.addShortCutCompact(getApplicationContext(), Shutcut2Activity.preShutcutActivity+id, shotLabel, packagename);
+                }else{
+                    Toast.makeText(getApplicationContext(), "没有Activity资源了", Toast.LENGTH_SHORT).show();
                 }
 
             }

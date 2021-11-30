@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.uniking.rock.R;
 import com.uniking.tool.Adb;
+import com.uniking.tool.Shutcut2Activity;
 
 import static com.uniking.tool.DeskShortCut.launchAPK3;
 
@@ -13,13 +14,17 @@ import static com.uniking.tool.DeskShortCut.launchAPK3;
  * Created by wzl on 11/29/21.
  */
 
-public class QQ extends Activity {
-    String packageName = "com.tencent.mobileqq";
+public class ShutcutActivity_13 extends Activity {
+
+    String simpleName = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foreground);
+
+        String packageName = Shutcut2Activity.getInstance(getApplicationContext()).getPackageName(simpleName);
+
         if(Adb.isEnable(getApplicationContext(), packageName)){
             ;
         }else{

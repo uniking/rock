@@ -8,20 +8,15 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.Icon;
 import android.support.v4.content.pm.ShortcutInfoCompat;
 import android.support.v4.content.pm.ShortcutManagerCompat;
 import android.support.v4.graphics.drawable.IconCompat;
-import android.text.NoCopySpan;
 import android.text.TextUtils;
 
-import com.uniking.activity.ZhiFuBao;
 import com.uniking.receiver.ShortCutReceiver;
 import com.uniking.rock.R;
 
@@ -55,7 +50,14 @@ public class DeskShortCut {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+    }
+    public static void addShortCutCompact(Context context, String activity, String shortLabel, String packageName) {
+        try{
+            Class clazz = Class.forName(activity);
+            addShortCutCompact(context, clazz, shortLabel, packageName);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public static void launchAPK3(Context context, String packageName) {
