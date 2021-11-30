@@ -47,24 +47,6 @@
                 android:text="获取使用情况权限" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/bt_zhifubao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="支付宝图标" />
-        <Button
-            android:id="@+id/bt_wechat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="微信图标" />
-        <Button
-            android:id="@+id/bt_qq"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="QQ图标" />
     </LinearLayout>
 
 
