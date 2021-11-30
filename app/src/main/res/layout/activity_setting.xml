@@ -47,6 +47,13 @@
                 android:text="获取使用情况权限" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/bt_close_logcat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="关闭logcat" />
+
     </LinearLayout>
 
 

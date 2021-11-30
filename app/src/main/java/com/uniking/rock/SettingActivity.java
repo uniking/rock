@@ -69,5 +69,11 @@ public class SettingActivity extends Activity {
                 }
             }
         });
+        findViewById(R.id.bt_close_logcat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.stopLogcat();
+            }
+        });
     }
 }

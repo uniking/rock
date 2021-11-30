@@ -19,9 +19,7 @@ import java.util.TimerTask;
 
 public class ScreenBroadcastReceiver extends BroadcastReceiver {
     private String action = null;
-    Object clock = new Object();
-    Timer disableTimer;
-    Timer idleTimer;
+    AlarmReceiver alarmReceiver = new AlarmReceiver();
 
     class DisableTask extends TimerTask{
         Context mContext;
@@ -30,38 +28,25 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
         }
         @Override
         public void run() {
-            //冻结应用
-            Map<String, String> apps = new AppList(mContext).getDisableList();
-            PackageManager pm = mContext.getPackageManager();
-            for(String pkg : apps.keySet()){
-                try{
-                    if(pm.getApplicationInfo(pkg, 0).enabled){
-                        Log.i("xxx", "冻结"+pkg);
-                        Adb.disableApp(pkg);
+            try{
+                //冻结应用
+                Map<String, String> apps = new AppList(mContext).getDisableList();
+                PackageManager pm = mContext.getPackageManager();
+                for(String pkg : apps.keySet()){
+                    try{
+                        if(pm.getApplicationInfo(pkg, 0).enabled){
+                            Log.i("xxx", "冻结"+pkg);
+                            Adb.disableApp(pkg);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
                     }
-                }catch (Exception e){
-                    e.printStackTrace();
                 }
+            }catch (Exception e){
+                e.printStackTrace();
             }
         }
     }
-
-    class IdleTask extends TimerTask{
-        Context mContext;
-        public IdleTask(Context context){
-            mContext = context;
-        }
-        @Override
-        public void run() {
-            //进入light idle模式
-            if("IDLE".equals(Adb.getLightStatus())){
-                ;//Adb.unforceIdle();
-            }else{
-                Adb.forceLightIdle();
-            }
-        }
-    }
-
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -69,34 +54,11 @@ public class ScreenBroadcastReceiver extends BroadcastReceiver {
         try{
             action = intent.getAction();
             if (Intent.ACTION_SCREEN_OFF.equals(action)) { // 锁屏
-                synchronized (clock){
-                    //锁屏10分钟冻结应用
-                    disableTimer = new Timer();
-                    disableTimer.schedule(new DisableTask(context), 1000*60*10);
-
-                    //锁屏30秒进入idle
-                    //发现文件管理的ftp服务阻止了进入idle,还是强制进入吧
-//                    idleTimer = new Timer();
-//                    idleTimer.schedule(new IdleTask(context), 1000*30);
-                }
-
+                //设定10分钟的闹铃
+                alarmReceiver.setAlarm(context, 1000*60*10);
             } else if (Intent.ACTION_USER_PRESENT.equals(action)) { // 解锁
-                synchronized (clock){
-                    //取消timer
-                    if(disableTimer != null){
-                        disableTimer.cancel();
-                        disableTimer = null;
-                    }
-//                    if(idleTimer != null){
-//                        idleTimer.cancel();
-//                        idleTimer = null;
-//                    }
-                }
-
-                //取消light idle模式
-//                if(Adb.getLightStatus().startsWith("IDLE")){
-//                    Adb.unforceIdle();
-//                }
+                //取消闹铃
+                alarmReceiver.cancelAlarm(context);
             }
         }catch (Exception e){
             ;

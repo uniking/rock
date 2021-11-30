@@ -187,4 +187,8 @@ public class Adb{
     public static String enabledLight(){
         return suDo("dumpsys deviceidle enabled light");
     }
+
+    public static String stopLogcat(){
+        return suDo("stop logd");
+    }
 }

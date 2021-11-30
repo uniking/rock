@@ -75,6 +75,8 @@
 
         <service android:name="com.uniking.service.ForegroundService"/>
         <receiver android:name="com.uniking.receiver.ShortCutReceiver" />
+        <receiver android:name="com.uniking.receiver.ScreenBroadcastReceiver"/>
+        <receiver android:name="com.uniking.receiver.AlarmReceiver"/>
     </application>
 
 </manifest>
