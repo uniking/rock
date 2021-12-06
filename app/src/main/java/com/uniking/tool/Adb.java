@@ -191,4 +191,7 @@ public class Adb{
     public static String stopLogcat(){
         return suDo("stop logd");
     }
+    public static void forceStop(String packageName){
+        suDo("am force-stop " + packageName);
+    }
 }

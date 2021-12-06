@@ -37,6 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     if(pm.getApplicationInfo(pkg, 0).enabled){
                         Log.i("xxx", "冻结"+pkg);
                         Adb.disableApp(pkg);
+                        Adb.forceStop(pkg);
                     }
                 }catch (Exception e){
                     e.printStackTrace();

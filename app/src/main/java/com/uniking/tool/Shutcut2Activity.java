@@ -23,7 +23,9 @@ import static android.content.Context.MODE_PRIVATE;
 public class Shutcut2Activity {
     Context mContent;
     String shutcutpath;
-    final int max_id = 39;
+
+    //已经支持最大的应用快捷图标数量
+    final int max_id = 70;
     static Shutcut2Activity self;
 
     public static final String preShutcutActivity = "com.uniking.activity.ShutcutActivity_";
