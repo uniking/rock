@@ -31,4 +31,5 @@ dependencies {
     implementation files('libs/jieba_android-release.aar')
     compile 'com.hyman:flowlayout-lib:1.1.2'
     compile 'com.android.support:design:27.1.1'
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:3.0.0'
 }

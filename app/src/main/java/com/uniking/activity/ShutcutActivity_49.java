@@ -36,6 +36,6 @@ public class ShutcutActivity_49 extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("aaa", "aaaa");
+        finish();
     }
 }
