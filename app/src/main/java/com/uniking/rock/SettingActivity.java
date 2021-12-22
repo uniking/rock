@@ -27,18 +27,7 @@ public class SettingActivity extends Activity {
             public void onClick(View v) {
                 //----------------------------
                 //启动服务
-                if (!ForegroundService.serviceIsLive) {
-                    // Android 8.0使用startForegroundService在前台启动新服务
-                    Intent foregroundService = new Intent(getApplicationContext(), ForegroundService.class);
-                    foregroundService.putExtra("Foreground", "This is a foreground service.");
-                    if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.O) {
-                        startForegroundService(foregroundService);
-                    } else {
-                        startService(foregroundService);
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "前台服务正在运行中...", Toast.LENGTH_SHORT).show();
-                }
+                RockTools.startForegroundService(getApplicationContext());
             }
         });
 
