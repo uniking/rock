@@ -17,8 +17,6 @@ import com.uniking.tool.Adb;
  */
 
 public class SettingActivity extends Activity {
-    Intent mForegroundService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,12 +29,12 @@ public class SettingActivity extends Activity {
                 //启动服务
                 if (!ForegroundService.serviceIsLive) {
                     // Android 8.0使用startForegroundService在前台启动新服务
-                    mForegroundService = new Intent(getApplicationContext(), ForegroundService.class);
-                    mForegroundService.putExtra("Foreground", "This is a foreground service.");
+                    Intent foregroundService = new Intent(getApplicationContext(), ForegroundService.class);
+                    foregroundService.putExtra("Foreground", "This is a foreground service.");
                     if (Build.VERSION.SDK_INT  >= Build.VERSION_CODES.O) {
-                        startForegroundService(mForegroundService);
+                        startForegroundService(foregroundService);
                     } else {
-                        startService(mForegroundService);
+                        startService(foregroundService);
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "前台服务正在运行中...", Toast.LENGTH_SHORT).show();
@@ -47,7 +45,9 @@ public class SettingActivity extends Activity {
         findViewById(R.id.bt_close_foreground).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopService(mForegroundService);
+                Intent foregroundService = new Intent(getApplicationContext(), ForegroundService.class);
+                foregroundService.putExtra("Foreground", "This is a foreground service.");
+                stopService(foregroundService);
             }
         });
 
