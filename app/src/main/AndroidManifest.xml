@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.uniking.rock">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission
@@ -108,6 +109,13 @@
         <receiver android:name="com.uniking.receiver.ShortCutReceiver" />
         <receiver android:name="com.uniking.receiver.ScreenBroadcastReceiver"/>
         <receiver android:name="com.uniking.receiver.AlarmReceiver"/>
+        <receiver android:name="com.uniking.receiver.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
