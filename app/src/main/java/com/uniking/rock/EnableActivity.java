@@ -1,6 +1,8 @@
 package com.uniking.rock;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -86,13 +88,37 @@ public class EnableActivity extends Activity {
         findViewById(R.id.bt_add_shutcut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 int id = Shutcut2Activity.getInstance(getApplicationContext()).getAvailableId();
                 if(id >= 0){
-                    String shotLabel = selectAppLab;
                     String packagename = apps.get(selectAppLab);
+                    if(Shutcut2Activity.getInstance(getApplicationContext()).haveShutcut(packagename)){
+                        //存在，跟用户确认是否再次添加
+                        new AlertDialog.Builder(EnableActivity.this).setTitle("图标已经存在，确定再次添加么")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //点击确定触发的事件
+                                        int id = Shutcut2Activity.getInstance(getApplicationContext()).getAvailableId();
+                                        String packagename = apps.get(selectAppLab);
+                                        String shotLabel = selectAppLab;
+                                        Shutcut2Activity.getInstance(getApplicationContext()).addShutcut2ActivityMap(id, packagename);
+                                        DeskShortCut.addShortCutCompact(getApplicationContext(), Shutcut2Activity.preShutcutActivity+id, shotLabel, packagename);
+                                    }
+                                })
+                                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
 
-                    Shutcut2Activity.getInstance(getApplicationContext()).addShutcut2ActivityMap(id, packagename);
-                    DeskShortCut.addShortCutCompact(getApplicationContext(), Shutcut2Activity.preShutcutActivity+id, shotLabel, packagename);
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //点击取消触发的事件
+                                    }
+                                }).show();
+                    }else{
+                        //不存在，直接添加
+                        String shotLabel = selectAppLab;
+                        Shutcut2Activity.getInstance(getApplicationContext()).addShutcut2ActivityMap(id, packagename);
+                        DeskShortCut.addShortCutCompact(getApplicationContext(), Shutcut2Activity.preShutcutActivity+id, shotLabel, packagename);
+                    }
                 }else{
                     Toast.makeText(getApplicationContext(), "没有Activity资源了", Toast.LENGTH_SHORT).show();
                 }

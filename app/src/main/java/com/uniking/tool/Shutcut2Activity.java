@@ -77,6 +77,10 @@ public class Shutcut2Activity {
         return vi;
     }
 
+    public boolean haveShutcut(String packageName){
+        return shutcutCatch.containsValue(packageName);
+    }
+
     public void addShutcut2ActivityMap(int id, String packageName){
         try {
             JSONObject json = null;

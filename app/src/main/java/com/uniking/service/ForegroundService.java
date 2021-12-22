@@ -48,11 +48,13 @@ public class ForegroundService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.e(TAG, "onStartCommand");
 
-        // 标记服务启动
-        ForegroundService.serviceIsLive = true;
-        // 数据获取
-        String data = intent.getStringExtra("Foreground");
-        Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+        if(intent != null){
+            // 标记服务启动
+            ForegroundService.serviceIsLive = true;
+            // 数据获取
+            String data = intent.getStringExtra("Foreground");
+            Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
+        }
 
         return super.onStartCommand(intent, flags, startId);
     }
