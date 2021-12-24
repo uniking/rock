@@ -31,11 +31,9 @@ public class AlarmReceiver extends BroadcastReceiver {
         try{
             //冻结应用
             Map<String, String> apps = new AppList(context).getDisableList();
-            PackageManager pm = context.getPackageManager();
             for(String pkg : apps.keySet()){
                 try{
-                    if(pm.getApplicationInfo(pkg, 0).enabled){
-                        Log.i("xxx", "冻结"+pkg);
+                    if(Adb.isEnable(context, pkg)){
                         Adb.disableApp(pkg);
                         Adb.forceStop(pkg);
                     }

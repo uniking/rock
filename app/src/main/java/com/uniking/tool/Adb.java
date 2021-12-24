@@ -3,9 +3,6 @@ package com.uniking.tool;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-
-import com.uniking.rock.R;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -16,8 +13,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Adb{
+    static Map<String,Boolean> enableCatch = new ConcurrentHashMap<>();
+
     public static Set<String> List2Set(List<String> list){
         Set<String> set = new HashSet<>();
         for(String one : list){
@@ -99,10 +99,14 @@ public class Adb{
 
     public static boolean isEnable(Context context, String packageName){
         boolean bRtn = true;
+        if(enableCatch.get(packageName) != null){
+            return enableCatch.get(packageName);
+        }
 
         try{
             PackageManager pm = context.getPackageManager();
             bRtn = pm.getApplicationInfo(packageName, 0).enabled;
+            enableCatch.put(packageName, bRtn);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -136,10 +140,12 @@ public class Adb{
 
     public static void disableApp(String packageName){
         suDo("pm disable-user " + packageName);
+        enableCatch.put(packageName, false);
     }
 
     public static void enableApp(String packageName){
         suDo("pm enable " + packageName);
+        enableCatch.put(packageName, true);
     }
 
     public static void initIdle(){
