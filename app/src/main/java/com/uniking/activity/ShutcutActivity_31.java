@@ -36,6 +36,6 @@ public class ShutcutActivity_31 extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        finish();
+        finishAndRemoveTask();
     }
 }
