@@ -18,6 +18,7 @@ import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -94,7 +95,7 @@ public class DivideCard extends LinearLayout implements TagFlowLayout.OnSelectLi
 
 
     private void selectAll() {
-        mSelectPosSet = new HashSet<>();
+        mSelectPosSet = new LinkedHashSet<>();
         for (int i = 0; i < mAllWords.size(); i++) {
             mSelectPosSet.add(i);
         }

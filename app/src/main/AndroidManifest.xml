@@ -31,6 +31,7 @@
         <activity android:name=".EnableActivity"/>
         <activity android:name=".SettingActivity"/>
         <activity android:name=".BigbangActivity"/>
+        <activity android:name=".BackupActivity"/>
 
 
         <activity android:name="com.uniking.activity.ShutcutActivity_0"/>

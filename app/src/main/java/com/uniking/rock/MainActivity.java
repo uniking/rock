@@ -68,6 +68,12 @@ public class MainActivity extends TabActivity {
         spec4.setIndicator("Bang");
         tabHost.addTab(spec4);
 
+        TabHost.TabSpec spec5 = tabHost.newTabSpec("t5");
+        Intent it5 = new Intent(this,BackupActivity.class);
+        spec5.setContent(it5);
+        spec5.setIndicator("备份");
+        tabHost.addTab(spec5);
+
         tabHost.setCurrentTab(0); // Setting the default Tab
     }
 
