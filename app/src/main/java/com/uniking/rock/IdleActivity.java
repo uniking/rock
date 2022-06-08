@@ -121,5 +121,11 @@ public class IdleActivity extends Activity {
                 Adb.ignoreWakupLock(apps.get(selectAppLab));
             }
         });
+        findViewById(R.id.bt_add_whitelist).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.addIdleWhiteList(apps.get(selectAppLab));
+            }
+        });
     }
 }

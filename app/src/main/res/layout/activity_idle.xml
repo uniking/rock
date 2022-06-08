@@ -37,6 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="忽略指定包的wakup_lock" />
+        <Button
+            android:id="@+id/bt_add_whitelist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="增加到省电白名单" />
     </LinearLayout>
 
 
