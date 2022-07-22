@@ -127,5 +127,31 @@ public class IdleActivity extends Activity {
                 Adb.addIdleWhiteList(apps.get(selectAppLab));
             }
         });
+        findViewById(R.id.bt_rm_whitelist).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.removeIdleWhiteList(apps.get(selectAppLab));
+            }
+        });
+        findViewById(R.id.bt_enable_freezer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.enableFreezer();
+            }
+        });
+        findViewById(R.id.bt_disable_freezer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Adb.disenableFreezer();
+            }
+        });
+        findViewById(R.id.bt_get_freezer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String status = Adb.getFreezer();
+                Toast.makeText(getApplicationContext(), status, Toast.LENGTH_LONG).show();
+
+            }
+        });
     }
 }

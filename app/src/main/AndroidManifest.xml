@@ -105,6 +105,26 @@
         <activity android:name="com.uniking.activity.ShutcutActivity_68"/>
         <activity android:name="com.uniking.activity.ShutcutActivity_69"/>
         <activity android:name="com.uniking.activity.ShutcutActivity_70"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_71"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_72"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_73"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_74"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_75"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_76"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_77"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_78"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_79"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_80"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_81"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_82"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_83"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_84"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_85"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_86"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_87"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_88"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_89"/>
+        <activity android:name="com.uniking.activity.ShutcutActivity_90"/>
 
         <service android:name="com.uniking.service.ForegroundService"/>
         <receiver android:name="com.uniking.receiver.ShortCutReceiver" />

@@ -25,7 +25,7 @@ public class Shutcut2Activity {
     String shutcutpath;
 
     //已经支持最大的应用快捷图标数量
-    final int max_id = 70;
+    final int max_id = 90;
     static Shutcut2Activity self;
 
     public static final String preShutcutActivity = "com.uniking.activity.ShutcutActivity_";

@@ -182,6 +182,25 @@ public class Adb{
         suDo("dumpsys deviceidle whitelist +" + packageName);
     }
 
+    public static void removeIdleWhiteList(String packageName){
+        suDo("dumpsys deviceidle whitelist -" + packageName);
+    }
+
+    /*
+    开启缓存应用程序冰箱, 墓碑模式
+     */
+    public static void enableFreezer(){
+        suDo("device_config put activity_manager_native_boot use_freezer true");
+    }
+
+    public static void disenableFreezer(){
+        suDo("device_config put activity_manager_native_boot use_freezer false");
+    }
+
+    public static String getFreezer(){
+        return suDo("device_config get activity_manager_native_boot use_freezer");
+    }
+
     public static String getLightStatus(){
         return suDo("dumpsys deviceidle get light");
     }
